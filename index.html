@@ -1,0 +1,520 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1, user-scalable=no">
+<title>Mis XV Años · Bárbara Citlalli</title>
+
+<!-- Tipografías: serif elegante para cuerpo/título y script para el nombre -->
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,400;0,500;0,600;1,500&family=Alex+Brush&family=Playfair+Display:wght@600;700&display=swap" rel="stylesheet">
+
+<style>
+  :root{
+    --ivory:#FBFAF6;
+    --mint:#BFE6D6;
+    --mint-deep:#8FCBAF;
+    --lilac:#D9CFF2;
+    --lilac-deep:#B39DDB;
+    --ink:#4A4458;
+    --ink-soft:#726B85;
+    --white:#FFFFFF;
+    --gold-hint:#E8DFC8;
+  }
+
+  *{box-sizing:border-box;}
+
+  html,body{
+    margin:0;
+    padding:0;
+    width:100%;
+    min-height:100%;
+    overflow-x:hidden;
+    background:var(--ivory);
+    -webkit-tap-highlight-color:transparent;
+  }
+
+  body{
+    font-family:'Cormorant Garamond', serif;
+    color:var(--ink);
+    display:flex;
+    justify-content:center;
+    align-items:flex-start;
+    min-height:100vh;
+    padding:24px 14px;
+  }
+
+  /* ---------- Tarjeta principal ---------- */
+  .card{
+    position:relative;
+    width:100%;
+    max-width:420px;
+    background:var(--white);
+    border-radius:32px;
+    box-shadow:0 18px 45px rgba(120,100,160,0.14), 0 4px 14px rgba(90,150,130,0.08);
+    padding:38px 26px 30px;
+    overflow:hidden;
+    isolation:isolate;
+  }
+
+  /* Halo suave de fondo dentro de la tarjeta */
+  .card::before{
+    content:"";
+    position:absolute;
+    inset:0;
+    background:
+      radial-gradient(circle at 12% 8%, rgba(191,230,214,0.35), transparent 40%),
+      radial-gradient(circle at 90% 95%, rgba(217,207,242,0.35), transparent 45%);
+    z-index:-1;
+  }
+
+  /* ---------- Decoración de esquinas: flores lilas + esferas disco ---------- */
+  .corner-deco{
+    position:absolute;
+    width:96px;
+    height:96px;
+    pointer-events:none;
+    z-index:2;
+    opacity:0.95;
+  }
+  .corner-deco.top-left{ top:-10px; left:-10px; }
+  .corner-deco.top-right{ top:-10px; right:-10px; transform:scaleX(-1); }
+  .corner-deco.bottom-left{ bottom:-10px; left:-10px; transform:scaleY(-1); }
+  .corner-deco.bottom-right{ bottom:-10px; right:-10px; transform:scale(-1,-1); }
+
+  /* ---------- Encabezado ---------- */
+  .header{
+    position:relative;
+    z-index:3;
+    text-align:center;
+    margin-top:18px;
+  }
+  .eyebrow{
+    font-family:'Playfair Display', serif;
+    font-weight:600;
+    font-size:15px;
+    letter-spacing:4px;
+    text-transform:uppercase;
+    color:var(--ink-soft);
+    margin:0 0 4px;
+  }
+  .name{
+    font-family:'Alex Brush', cursive;
+    font-size:56px;
+    line-height:1.05;
+    margin:0;
+    background:linear-gradient(100deg, var(--lilac-deep) 10%, var(--mint-deep) 90%);
+    -webkit-background-clip:text;
+    background-clip:text;
+    color:transparent;
+    padding:0 6px;
+  }
+  .divider{
+    width:64px;
+    height:2px;
+    margin:14px auto 0;
+    border-radius:2px;
+    background:linear-gradient(90deg, var(--lilac-deep), var(--mint-deep));
+    opacity:0.6;
+  }
+
+  /* ---------- Marco de foto ---------- */
+  .photo-wrap{
+    position:relative;
+    z-index:3;
+    display:flex;
+    justify-content:center;
+    margin:30px auto 0;
+  }
+  .photo-frame{
+    width:220px;
+    height:220px;
+    border-radius:50%;
+    padding:6px;
+    background:linear-gradient(135deg, var(--lilac) 0%, var(--mint) 100%);
+    box-shadow:0 10px 30px rgba(140,120,180,0.22);
+  }
+  .photo-frame-inner{
+    width:100%;
+    height:100%;
+    border-radius:50%;
+    padding:4px;
+    background:var(--white);
+  }
+  .photo-frame img{
+    width:100%;
+    height:100%;
+    object-fit:cover;
+    border-radius:50%;
+    display:block;
+  }
+
+  /* ---------- Texto invitación ---------- */
+  .invite-text{
+    position:relative;
+    z-index:3;
+    text-align:center;
+    font-size:19px;
+    font-weight:500;
+    line-height:1.55;
+    color:var(--ink);
+    margin:24px auto 6px;
+    max-width:320px;
+  }
+
+  /* ---------- Botón de subida ---------- */
+  .upload-btn{
+    position:relative;
+    z-index:3;
+    display:flex;
+    align-items:center;
+    justify-content:center;
+    gap:10px;
+    width:100%;
+    margin-top:26px;
+    padding:17px 12px;
+    border:none;
+    border-radius:18px;
+    cursor:pointer;
+    font-family:'Playfair Display', serif;
+    font-weight:600;
+    font-size:15.5px;
+    letter-spacing:0.5px;
+    color:var(--white);
+    background:linear-gradient(120deg, var(--lilac-deep) 0%, var(--mint-deep) 100%);
+    box-shadow:0 10px 24px rgba(150,130,190,0.35);
+    transition:transform 0.15s ease, box-shadow 0.15s ease, filter 0.15s ease;
+    -webkit-appearance:none;
+  }
+  .upload-btn:active{
+    transform:scale(0.97);
+    box-shadow:0 6px 14px rgba(150,130,190,0.3);
+    filter:brightness(0.97);
+  }
+  .upload-btn svg{ width:22px; height:22px; flex-shrink:0; }
+
+  .footnote{
+    position:relative;
+    z-index:3;
+    text-align:center;
+    font-size:13px;
+    color:var(--ink-soft);
+    margin-top:16px;
+    letter-spacing:0.3px;
+  }
+
+  /* ---------- Toast de confirmación ---------- */
+  .toast{
+    position:fixed;
+    left:50%;
+    bottom:32px;
+    transform:translateX(-50%) translateY(20px);
+    background:linear-gradient(120deg, var(--lilac-deep), var(--mint-deep));
+    color:var(--white);
+    padding:14px 22px;
+    border-radius:16px;
+    font-family:'Playfair Display', serif;
+    font-size:14.5px;
+    font-weight:600;
+    letter-spacing:0.3px;
+    box-shadow:0 12px 30px rgba(120,100,160,0.35);
+    opacity:0;
+    pointer-events:none;
+    transition:opacity 0.35s ease, transform 0.35s ease;
+    z-index:999;
+    display:flex;
+    align-items:center;
+    gap:8px;
+    max-width:88vw;
+    text-align:center;
+  }
+  .toast.show{
+    opacity:1;
+    transform:translateX(-50%) translateY(0);
+  }
+
+  @media (max-width:360px){
+    .name{ font-size:46px; }
+    .photo-frame{ width:180px; height:180px; }
+    .invite-text{ font-size:17px; }
+  }
+
+  @media (prefers-reduced-motion: reduce){
+    .upload-btn, .toast{ transition:none; }
+  }
+</style>
+</head>
+<body>
+
+<div class="card">
+
+  <!-- Decoraciones de esquina: flor lila + esfera disco, en SVG -->
+  <svg class="corner-deco top-left" viewBox="0 0 100 100" xmlns="http://www.w3.org/2000/svg">
+    <defs>
+      <radialGradient id="disco1" cx="35%" cy="35%" r="70%">
+        <stop offset="0%" stop-color="#ffffff"/>
+        <stop offset="45%" stop-color="#BFE6D6"/>
+        <stop offset="100%" stop-color="#8FCBAF"/>
+      </radialGradient>
+      <pattern id="facets1" width="7" height="7" patternUnits="userSpaceOnUse" patternTransform="rotate(15)">
+        <rect width="7" height="7" fill="none"/>
+        <path d="M0 0 L7 0 L3.5 3.5 Z" fill="rgba(255,255,255,0.35)"/>
+        <path d="M0 7 L7 7 L3.5 3.5 Z" fill="rgba(120,100,160,0.12)"/>
+      </pattern>
+    </defs>
+    <!-- Esfera disco estilizada -->
+    <circle cx="24" cy="24" r="15" fill="url(#disco1)"/>
+    <circle cx="24" cy="24" r="15" fill="url(#facets1)"/>
+    <circle cx="24" cy="24" r="15" fill="none" stroke="#ffffff" stroke-width="0.6" opacity="0.5"/>
+    <!-- Flor lila (5 pétalos) -->
+    <g transform="translate(66,60)">
+      <g fill="#D9CFF2" opacity="0.9">
+        <ellipse cx="0" cy="-11" rx="6" ry="10"/>
+        <ellipse cx="10" cy="-3" rx="6" ry="10" transform="rotate(72 10 -3)"/>
+        <ellipse cx="7" cy="9" rx="6" ry="10" transform="rotate(144 7 9)"/>
+        <ellipse cx="-7" cy="9" rx="6" ry="10" transform="rotate(216 -7 9)"/>
+        <ellipse cx="-10" cy="-3" rx="6" ry="10" transform="rotate(288 -10 -3)"/>
+      </g>
+      <circle cx="0" cy="0" r="4.5" fill="#B39DDB"/>
+    </g>
+    <!-- pequeño brote -->
+    <circle cx="46" cy="80" r="3" fill="#BFE6D6"/>
+  </svg>
+
+  <svg class="corner-deco top-right" viewBox="0 0 100 100" xmlns="http://www.w3.org/2000/svg">
+    <defs>
+      <radialGradient id="disco2" cx="35%" cy="35%" r="70%">
+        <stop offset="0%" stop-color="#ffffff"/>
+        <stop offset="45%" stop-color="#D9CFF2"/>
+        <stop offset="100%" stop-color="#B39DDB"/>
+      </radialGradient>
+    </defs>
+    <g transform="translate(70,58)">
+      <g fill="#BFE6D6" opacity="0.9">
+        <ellipse cx="0" cy="-9" rx="5" ry="8.5"/>
+        <ellipse cx="8" cy="-2" rx="5" ry="8.5" transform="rotate(72 8 -2)"/>
+        <ellipse cx="6" cy="8" rx="5" ry="8.5" transform="rotate(144 6 8)"/>
+        <ellipse cx="-6" cy="8" rx="5" ry="8.5" transform="rotate(216 -6 8)"/>
+        <ellipse cx="-8" cy="-2" rx="5" ry="8.5" transform="rotate(288 -8 -2)"/>
+      </g>
+      <circle cx="0" cy="0" r="4" fill="#8FCBAF"/>
+    </g>
+    <circle cx="26" cy="26" r="13" fill="url(#disco2)"/>
+    <circle cx="26" cy="26" r="13" fill="url(#facets1)"/>
+    <circle cx="26" cy="26" r="13" fill="none" stroke="#ffffff" stroke-width="0.6" opacity="0.5"/>
+    <circle cx="52" cy="82" r="2.6" fill="#D9CFF2"/>
+  </svg>
+
+  <svg class="corner-deco bottom-left" viewBox="0 0 100 100" xmlns="http://www.w3.org/2000/svg">
+    <circle cx="22" cy="22" r="12" fill="url(#disco1)"/>
+    <circle cx="22" cy="22" r="12" fill="url(#facets1)"/>
+    <g transform="translate(62,62)">
+      <g fill="#D9CFF2" opacity="0.85">
+        <ellipse cx="0" cy="-8" rx="4.5" ry="7.5"/>
+        <ellipse cx="7" cy="-2" rx="4.5" ry="7.5" transform="rotate(72 7 -2)"/>
+        <ellipse cx="5" cy="7" rx="4.5" ry="7.5" transform="rotate(144 5 7)"/>
+        <ellipse cx="-5" cy="7" rx="4.5" ry="7.5" transform="rotate(216 -5 7)"/>
+        <ellipse cx="-7" cy="-2" rx="4.5" ry="7.5" transform="rotate(288 -7 -2)"/>
+      </g>
+      <circle cx="0" cy="0" r="3.5" fill="#B39DDB"/>
+    </g>
+  </svg>
+
+  <svg class="corner-deco bottom-right" viewBox="0 0 100 100" xmlns="http://www.w3.org/2000/svg">
+    <circle cx="24" cy="24" r="13" fill="url(#disco2)"/>
+    <circle cx="24" cy="24" r="13" fill="url(#facets1)"/>
+    <g transform="translate(64,60)">
+      <g fill="#BFE6D6" opacity="0.85">
+        <ellipse cx="0" cy="-9" rx="5" ry="8.5"/>
+        <ellipse cx="8" cy="-2" rx="5" ry="8.5" transform="rotate(72 8 -2)"/>
+        <ellipse cx="6" cy="8" rx="5" ry="8.5" transform="rotate(144 6 8)"/>
+        <ellipse cx="-6" cy="8" rx="5" ry="8.5" transform="rotate(216 -6 8)"/>
+        <ellipse cx="-8" cy="-2" rx="5" ry="8.5" transform="rotate(288 -8 -2)"/>
+      </g>
+      <circle cx="0" cy="0" r="4" fill="#8FCBAF"/>
+    </g>
+  </svg>
+
+  <!-- Encabezado -->
+  <header class="header">
+    <p class="eyebrow">Mis XV Años</p>
+    <h1 class="name">Bárbara Citlalli</h1>
+    <div class="divider"></div>
+  </header>
+
+  <!-- Foto principal -->
+  <div class="photo-wrap">
+    <div class="photo-frame">
+      <div class="photo-frame-inner">
+        <!--
+          =========================================================
+          PEGA AQUÍ LA URL DE TU FOTO PRINCIPAL
+          Reemplaza el valor de "src" por la URL final de tu imagen
+          (por ejemplo, una imagen subida a Cloudinary o cualquier
+          otro hosting). Se recomienda una imagen cuadrada de al
+          menos 500x500 px para que se vea nítida dentro del marco.
+          =========================================================
+        -->
+        <img
+          src="foto7.jpeg"
+          alt="Foto de Bárbara Citlalli">
+      </div>
+    </div>
+  </div>
+
+  <!-- Texto de invitación -->
+  <p class="invite-text">
+    ¡Gracias por compartir conmigo este día tan mágico!
+    Inmortaliza estos momentos y súbelos aquí, para que
+    juntos guardemos cada recuerdo.
+  </p>
+
+  <!-- Botón de subida -->
+  <button id="uploadBtn" class="upload-btn" type="button">
+    <svg viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
+      <path d="M4 8.5C4 7.39543 4.89543 6.5 6 6.5H8.17157C8.70201 6.5 9.21071 6.28929 9.58579 5.91421L10.4142 5.08579C10.7893 4.71071 11.298 4.5 11.8284 4.5H12.1716C12.702 4.5 13.2107 4.71071 13.5858 5.08579L14.4142 5.91421C14.7893 6.28929 15.298 6.5 15.8284 6.5H18C19.1046 6.5 20 7.39543 20 8.5V17C20 18.1046 19.1046 19 18 19H6C4.89543 19 4 18.1046 4 17V8.5Z" stroke="#ffffff" stroke-width="1.6" stroke-linejoin="round"/>
+      <circle cx="12" cy="12.5" r="3.4" stroke="#ffffff" stroke-width="1.6"/>
+    </svg>
+    SUBIR FOTOS &amp; VIDEOS DE BÁRBARA
+  </button>
+
+  <p class="footnote">Tus recuerdos se guardan directo en la nube</p>
+
+</div>
+
+<!-- Toast de confirmación -->
+<div id="toast" class="toast">¡Gracias por subir tu recuerdo! 💜</div>
+
+<!-- ============================================================ -->
+<!-- Cloudinary Upload Widget (script oficial)                    -->
+<!-- ============================================================ -->
+<script src="https://upload-widget.cloudinary.com/global/all.js" type="text/javascript"></script>
+
+<script>
+  /* =========================================================================
+     CONFIGURACIÓN DE CLOUDINARY
+     -------------------------------------------------------------------------
+     Reemplaza los siguientes valores con los datos de tu cuenta de Cloudinary:
+
+     1) CLOUD_NAME:
+        - Lo encuentras en tu Dashboard de Cloudinary, arriba a la izquierda.
+        - Ejemplo: "dxxxxxxxx"
+
+     2) UPLOAD_PRESET:
+        - Debe ser un "Unsigned upload preset" (para poder subir archivos
+          directo desde el navegador sin backend).
+        - Se crea en: Settings > Upload > Upload presets > Add upload preset
+          (asegúrate de poner el modo en "Unsigned").
+
+     3) (Opcional) FOLDER:
+        - Carpeta dentro de Cloudinary donde se organizarán las fotos/videos
+          de la fiesta. Puedes dejarlo como está o cambiarlo, ej: "xv-barbara".
+     ========================================================================= */
+
+  const CLOUD_NAME     = "knpx3fa5";      // 👈 PEGA AQUÍ tu Cloud Name
+  const UPLOAD_PRESET  = "presets_xv";   // 👈 PEGA AQUÍ tu Upload Preset (unsigned)
+  const FOLDER_NAME    = "xv-barbara-citlalli";      // 👈 (Opcional) carpeta destino en Cloudinary
+
+  // Referencias de UI
+  const toastEl = document.getElementById("toast");
+  let toastTimer = null;
+
+  function showToast(message) {
+    toastEl.textContent = message;
+    toastEl.classList.add("show");
+    clearTimeout(toastTimer);
+    toastTimer = setTimeout(() => {
+      toastEl.classList.remove("show");
+    }, 3200);
+  }
+
+  // Creación del Widget de Cloudinary
+  const uploadWidget = cloudinary.createUploadWidget(
+    {
+      cloudName: CLOUD_NAME,
+      uploadPreset: UPLOAD_PRESET,
+      folder: FOLDER_NAME,
+
+      // Acepta tanto imágenes como videos
+      resourceType: "auto",
+      clientAllowedFormats: [
+        "jpg", "jpeg", "png", "heic", "webp", "gif",
+        "mp4", "mov", "avi", "webm", "m4v"
+      ],
+
+      // Permite seleccionar / capturar varios archivos a la vez
+      multiple: true,
+      maxFiles: 10,
+
+      // Fuentes de origen disponibles: cámara del teléfono y galería local
+      sources: ["camera", "local"],
+
+      // Estilo del widget acorde a la paleta de la invitación
+      styles: {
+        palette: {
+          window: "#FBFAF6",
+          windowBorder: "#D9CFF2",
+          tabIcon: "#8FCBAF",
+          menuIcons: "#4A4458",
+          textDark: "#4A4458",
+          textLight: "#FFFFFF",
+          link: "#B39DDB",
+          action: "#8FCBAF",
+          inactiveTabIcon: "#B0A9C2",
+          error: "#E27D7D",
+          inProgress: "#B39DDB",
+          complete: "#8FCBAF",
+          sourceBg: "#FFFFFF"
+        },
+        fonts: {
+          "'Cormorant Garamond', serif": {
+            url: "https://fonts.googleapis.com/css2?family=Cormorant+Garamond&display=swap",
+            active: true
+          }
+        }
+      },
+
+      text: {
+        es: {
+          menu: {
+            files: "Mis archivos",
+            camera: "Cámara"
+          },
+          local: {
+            browse: "Buscar",
+            dd_title_single: "Arrastra tu foto o video aquí",
+            dd_title_multi: "Arrastra tus fotos o videos aquí"
+          }
+        }
+      },
+      language: "es"
+    },
+    (error, result) => {
+      if (error) {
+        console.error("Error al subir el archivo a Cloudinary:", error);
+        return;
+      }
+
+      // Evento: subida individual completada con éxito
+      if (result && result.event === "success") {
+        console.log("Archivo subido correctamente:", result.info.secure_url);
+        showToast("¡Gracias por subir tu recuerdo! 💜");
+      }
+
+      // Evento: el usuario cerró el widget (por ejemplo, tras terminar)
+      if (result && result.event === "queues-end") {
+        // Todas las subidas de la cola terminaron
+        showToast("¡Gracias por subir tu recuerdo! 💜");
+      }
+    }
+  );
+
+  // Abrir el widget al presionar el botón principal
+  document.getElementById("uploadBtn").addEventListener("click", () => {
+    uploadWidget.open();
+  });
+</script>
+
+</body>
+</html>
